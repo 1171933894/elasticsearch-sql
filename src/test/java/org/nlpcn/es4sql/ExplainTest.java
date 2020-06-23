@@ -17,6 +17,11 @@ import static org.nlpcn.es4sql.TestsConstants.*;
 public class ExplainTest {
 
     @Test
+    public void searchSanityByOwner() throws IOException, SqlParseException, NoSuchMethodException, IllegalAccessException, SQLFeatureNotSupportedException, InvocationTargetException {
+        explain("select MIN(mlmoney) as f-5,MAX(mlmoney) as f-6,SUM(mlmoney) as f-7 from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity,date_histogram(field='mldate','interval'='1d'),mlmj,mledu order by SUM(mlmoney)");
+    }
+
+    @Test
     public void searchSanity() throws IOException, SqlParseException, NoSuchMethodException, IllegalAccessException, SQLFeatureNotSupportedException, InvocationTargetException {
         String expectedOutput = Files.toString(new File("src/test/resources/expectedOutput/search_explain.json"), StandardCharsets.UTF_8).replaceAll("\r","");
         String result = explain(String.format("SELECT * FROM %s WHERE firstname LIKE 'A%%' AND age > 20 GROUP BY gender order by _score", TEST_INDEX_ACCOUNT));
@@ -97,7 +102,12 @@ public class ExplainTest {
     }
 
     private String explain(String sql) throws SQLFeatureNotSupportedException, SqlParseException {
-        SearchDao searchDao = MainTestSuite.getSearchDao();
+        SearchDao searchDao = null;
+        try {
+            searchDao = MainTestSuite.staticGetSearchDao();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SqlElasticRequestBuilder requestBuilder = searchDao.explain(sql).explain();
         return requestBuilder.explain();
     }

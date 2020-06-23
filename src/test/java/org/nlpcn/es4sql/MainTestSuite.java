@@ -24,6 +24,9 @@ import org.junit.runners.Suite;
 
 import com.google.common.io.ByteStreams;
 
+/**
+ * @Suite.SuiteClasses：如果是需要多个单元测试类整合测试 使用一个Runner进行异步测试，只需要把相关的class放入到SuiteClasses{}中即可
+ */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 		QueryTest.class,
@@ -46,6 +49,12 @@ public class MainTestSuite {
 
 	private static TransportClient client;
 	private static SearchDao searchDao;
+
+    public static SearchDao staticGetSearchDao() throws Exception {
+        Settings settings = Settings.builder().put("client.transport.ignore_cluster_name", true).build();
+        client = new PreBuiltXPackTransportClient(settings).addTransportAddress(getTransportAddress());
+        return new SearchDao(client);
+    }
 
 	@BeforeClass
 	public static void setUp() throws Exception {

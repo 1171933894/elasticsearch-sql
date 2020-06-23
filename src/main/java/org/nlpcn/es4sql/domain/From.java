@@ -2,7 +2,7 @@ package org.nlpcn.es4sql.domain;
 
 
 /**
- * Represents the from clause.
+ * Represents the from clause（条款）.
  * Contains index and type which the
  * query refer to.
  */

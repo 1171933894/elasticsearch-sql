@@ -33,7 +33,7 @@ import java.util.List;
 public class ESActionFactory {
 
 	/**
-	 * Create the compatible Query object
+	 * Create the compatible（兼容）Query object
 	 * based on the SQL query.
 	 *
 	 * @param sql The SQL query.
