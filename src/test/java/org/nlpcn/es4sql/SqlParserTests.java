@@ -505,6 +505,7 @@ public class SqlParserTests {
 
     @Test
     public void explicitScriptOnAggregation() throws SqlParseException {
+        // important : SELECT sum( script('add','doc[\'mlmoney\'].value + doc[\'mlmoney\'].value') )  as sso, sum(mlmoney) sst from  index_354 group by mlcity order by sso desc
         String query = "SELECT avg( script('add','doc[\\'field1\\'].value + doc[\\'field2\\'].value') ) FROM index/type";
         SQLExpr sqlExpr = queryToExpr(query);
         Select select = parser.parseSelect((SQLQueryExpr) sqlExpr);

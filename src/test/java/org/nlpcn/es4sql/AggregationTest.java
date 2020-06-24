@@ -55,7 +55,7 @@ public class AggregationTest {
 		assertThat(sum.getValue(), equalTo(25714837.0));
 	}
 
-    // script on metric aggregation tests. uncomment if your elastic has scripts enable (disabled by default)
+    // script on metric(公制) aggregation tests. uncomment if your elastic has scripts enable (disabled by default)
     //todo: find a way to check if scripts are enabled
 //    @Test
 //    public void sumWithScriptTest() throws IOException, SqlParseException, SQLFeatureNotSupportedException {
