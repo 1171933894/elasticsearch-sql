@@ -20,12 +20,13 @@ import java.util.*;
 /**
  * Created by allwefantasy on 8/30/16.
  */
-public class ObjectResultsExtractor {
+public class ObjectResultsExtractor {// extractor:提取器
     private final boolean includeType;
     private final boolean includeScore;
     private final boolean includeId;
     private int currentLineIndex;
 
+    // 结果集中是否包含score，是否包含type，是否包含ID，我们可以都设置为 false
     public ObjectResultsExtractor(boolean includeScore, boolean includeType, boolean includeId) {
         this.includeScore = includeScore;
         this.includeType = includeType;
