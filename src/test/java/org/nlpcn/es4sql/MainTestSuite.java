@@ -29,7 +29,7 @@ import com.google.common.io.ByteStreams;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-		QueryTest.class,
+		/*QueryTest.class,
 		MethodQueryTest.class,
 		AggregationTest.class,
         JoinTests.class,
@@ -43,7 +43,7 @@ import com.google.common.io.ByteStreams;
 		JDBCTests.class,
         UtilTests.class,
         MultiQueryTests.class,
-        DeleteTest.class
+        DeleteTest.class*/
 })
 public class MainTestSuite {
 
@@ -102,18 +102,18 @@ public class MainTestSuite {
         prepareSpatialIndex(TEST_INDEX_LOCATION2, "location2");
         loadBulk("src/test/resources/locations2.json", TEST_INDEX_LOCATION2);
 
-        createTestIndex(TEST_INDEX_NESTED_TYPE);
-        prepareNestedTypeIndex();
-        loadBulk("src/test/resources/nested_objects.json", TEST_INDEX_NESTED_TYPE);
-
-        createTestIndex(TEST_INDEX_JOIN_TYPE);
-        prepareJoinTypeIndex();
-        loadBulk("src/test/resources/join_objects.json", TEST_INDEX_JOIN_TYPE);
-
-        searchDao = new SearchDao(client);
-
-        //refresh to make sure all the docs will return on queries
-        client.admin().indices().prepareRefresh(TEST_INDEX + "*").get();
+//        createTestIndex(TEST_INDEX_NESTED_TYPE);
+//        prepareNestedTypeIndex();
+//        loadBulk("src/test/resources/nested_objects.json", TEST_INDEX_NESTED_TYPE);
+//
+//        createTestIndex(TEST_INDEX_JOIN_TYPE);
+//        prepareJoinTypeIndex();
+//        loadBulk("src/test/resources/join_objects.json", TEST_INDEX_JOIN_TYPE);
+//
+//        searchDao = new SearchDao(client);
+//
+//        //refresh to make sure all the docs will return on queries
+//        client.admin().indices().prepareRefresh(TEST_INDEX + "*").get();
 
 		System.out.println("Finished the setup process...");
 	}
@@ -286,7 +286,7 @@ public class MainTestSuite {
 	public static void tearDown() {
 		System.out.println("teardown process...");
 
-        deleteTestIndex(TEST_INDEX + "*");
+//        deleteTestIndex(TEST_INDEX + "*");
 
 		client.close();
 	}
