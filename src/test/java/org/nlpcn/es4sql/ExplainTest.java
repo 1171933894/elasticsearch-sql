@@ -21,7 +21,8 @@ public class ExplainTest {
         //explain("select MIN(mlmoney),MAX(mlmoney) ,SUM(mlmoney)  from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity,date_histogram(field='mldate','interval'='1d'),mlmj,mledu order by SUM(mlmoney)");
         //explain("select MIN(mlmoney+mlmoney) ,SUM(mlmoney)  from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity order by SUM(mlmoney)");
         //explain("select TOPHITS(mlmoney) ,SUM(mlmoney)  from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity, range(mlmoney,10,20,50) order by TOPHITS(mlmoney)");
-        explain("SELECT sum( script('add','doc[\\'mlmoney\\'].value + doc[\\'mlmoney\\'].value') )  as sso, sum(mlmoney) sst from  index_354 group by mlcity order by sso desc");
+//        explain("SELECT sum( script('add','doc[\\'mlmoney\\'].value + doc[\\'mlmoney\\'].value') )  as sso, sum(mlmoney) sst from  index_354 group by mlcity order by sso desc");
+        explain("select MIN(mlmoney) as f-5,MAX(mlmoney) as f-6,SUM(mlmoney) as f-7 from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity,date_histogram(field='mldate','interval'='1d'),mlmj,mledu limit 5000");
         //explain("SELECT (sum(mlmoney) + max(mlmoney))  as sso from  index_354");
     }
 
