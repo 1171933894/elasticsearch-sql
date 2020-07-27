@@ -19,6 +19,7 @@ import org.elasticsearch.index.reindex.DeleteByQueryRequestBuilder;
 import org.elasticsearch.xpack.client.PreBuiltXPackTransportClient;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -56,7 +57,7 @@ public class MainTestSuite {
         return new SearchDao(client);
     }
 
-	@BeforeClass
+	@Test
 	public static void setUp() throws Exception {
 		Settings settings = Settings.builder().put("client.transport.ignore_cluster_name",true).build();
 		client = new PreBuiltXPackTransportClient(settings).addTransportAddress(getTransportAddress());
@@ -282,7 +283,12 @@ public class MainTestSuite {
         client.admin().indices().preparePutMapping(TEST_INDEX_JOIN_TYPE).setType("joinType").setSource(dataMapping, XContentType.JSON).execute().actionGet();
     }
 
-    @AfterClass
+    @Test
+    public void testInit(){
+        System.out.println("init success and final");
+    }
+
+    //@AfterClass
 	public static void tearDown() {
 		System.out.println("teardown process...");
 

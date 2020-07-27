@@ -1,6 +1,7 @@
 package org.nlpcn.es4sql;
 
 import com.google.common.io.Files;
+import org.elasticsearch.action.ActionResponse;
 import org.junit.Test;
 import org.nlpcn.es4sql.exception.SqlParseException;
 import org.nlpcn.es4sql.query.SqlElasticRequestBuilder;
@@ -17,12 +18,18 @@ import static org.nlpcn.es4sql.TestsConstants.*;
 public class ExplainTest {
 
     @Test
+    public void testInit() throws Exception {
+        MainTestSuite.setUp();
+    }
+
+    @Test
     public void searchSanityByOwner() throws IOException, SqlParseException, NoSuchMethodException, IllegalAccessException, SQLFeatureNotSupportedException, InvocationTargetException {
         //explain("select MIN(mlmoney),MAX(mlmoney) ,SUM(mlmoney)  from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity,date_histogram(field='mldate','interval'='1d'),mlmj,mledu order by SUM(mlmoney)");
         //explain("select MIN(mlmoney+mlmoney) ,SUM(mlmoney)  from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity order by SUM(mlmoney)");
         //explain("select TOPHITS(mlmoney) ,SUM(mlmoney)  from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity, range(mlmoney,10,20,50) order by TOPHITS(mlmoney)");
 //        explain("SELECT sum( script('add','doc[\\'mlmoney\\'].value + doc[\\'mlmoney\\'].value') )  as sso, sum(mlmoney) sst from  index_354 group by mlcity order by sso desc");
-        explain("select MIN(mlmoney) as f-5,MAX(mlmoney) as f-6,SUM(mlmoney) as f-7 from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity,date_histogram(field='mldate','interval'='1d'),mlmj,mledu limit 5000");
+//        explain("select MIN(mlmoney) as f-5,MAX(mlmoney) as f-6,SUM(mlmoney) as f-7 from index_354 where mlmoney>10 AND mlmoney>11 and interfaceEndTime >= '2019-06-20 12:00:51' group by mlcity,date_histogram(field='mldate','interval'='1d'),mlmj,mledu limit 5000");
+        explain("select description from elasticsearch-sql_test_index_location2,elasticsearch-sql_test_index_location");
         //explain("SELECT (sum(mlmoney) + max(mlmoney))  as sso from  index_354");
     }
 
@@ -114,6 +121,10 @@ public class ExplainTest {
             e.printStackTrace();
         }
         SqlElasticRequestBuilder requestBuilder = searchDao.explain(sql).explain();
-        return requestBuilder.explain();
+//        return requestBuilder.explain();
+
+        ActionResponse actionResponse = requestBuilder.get();
+        System.out.println(actionResponse);
+        return "";
     }
 }
