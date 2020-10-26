@@ -71,6 +71,7 @@ public class MainTestSuite {
 		loadBulk("src/test/resources/online.json");
         prepareAccountsIndex();
 		loadBulk("src/test/resources/accounts.json");
+//		loadBulk("src/test/resources/test.json");
         preparePhrasesIndex();
         loadBulk("src/test/resources/phrases.json");
         prepareDogsIndex();

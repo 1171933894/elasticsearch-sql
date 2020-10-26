@@ -498,6 +498,11 @@ public class AggregationTest {
 		final String query = String.format("SELECT /*! DOCS_WITH_AGGREGATION(10) */" +
                 " * FROM %s/account GROUP BY (gender, terms('field'='age','size'=200,'alias'='age')), (state) LIMIT 200,200", TEST_INDEX);
 
+//		final String query1 = String.format("SELECT count(insert_time)" +
+//                " FROM elasticsearch-sql_test_index GROUP BY terms('field'='insert_time','size'=200000,'alias'='insert_time'),age", TEST_INDEX);
+//
+//		final String query = "SELECT count(age) FROM elasticsearch-sql_test_index group by terms('field'='age','size'=20000,'alias'='age')";
+
 		Map<String, Set<Integer>> buckets = new HashMap<>();
 
         SqlElasticSearchRequestBuilder select = getSearchRequestBuilder(query);

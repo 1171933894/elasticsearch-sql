@@ -13,6 +13,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.nlpcn.es4sql.exception.SqlParseException;
 import org.nlpcn.es4sql.query.SqlElasticSearchRequestBuilder;
@@ -31,9 +32,17 @@ import static org.nlpcn.es4sql.TestsConstants.TS_DATE_FORMAT;
 
 public class QueryTest {
 
+	@BeforeClass
+	public static void setUp() throws Exception {
+
+		MainTestSuite.setUp();
+
+	}
+
 	@Test
 	public void searchTypeTest() throws IOException, SqlParseException, SQLFeatureNotSupportedException{
 		SearchHits response = query(String.format("SELECT * FROM %s/phrase LIMIT 1000", TEST_INDEX));
+//		SearchHits response = query(String.format("SELECT * FROM elasticsearch-sql_test_index LIMIT 1000", TEST_INDEX));
 		Assert.assertEquals(4, response.getTotalHits());
 	}
 
